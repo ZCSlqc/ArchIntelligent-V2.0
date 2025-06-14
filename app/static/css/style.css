@@ -1,0 +1,547 @@
+body {
+    font-family: 'Inter', 'Microsoft YaHei', Arial, sans-serif;
+    background-color: #e9ecef;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.main-container {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    width: 600px;
+    margin: 30px auto 30px auto;
+    background: transparent;
+    min-height: 100vh;
+    box-sizing: border-box;
+}
+
+
+
+/* ======================= 顶部导航栏 ======================= */
+.bookmark-bar {
+    position: absolute;
+    top: 10px;
+    left: 20px;
+    display: flex;
+    align-items: flex-end;
+    background: transparent;
+    border: none;
+    z-index: 200;
+    height: 44px;
+}
+
+.bookmark-btn {
+    background: #f1f3f5;
+    border: 1.5px solid #e0e0e0;
+    border-bottom: none;
+    border-radius: 8px 8px 0 0;
+    color: #888;
+    font-weight: 600;
+    padding: 8px 22px 12px 22px;
+    margin-right: 8px;
+    cursor: pointer;
+    transition: background 0.2s, color 0.2s, border 0.2s;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.04);
+    outline: none;
+    font-size: 15px;
+}
+
+.bookmark-btn.active, .bookmark-btn:active {
+    background: #007bff;
+    color: #fff;
+    border-color: #007bff;
+}
+
+.bookmark-btn:hover {
+    background: #e3eaff;
+    color: #007bff;
+    border-color: #007bff;
+}
+
+
+
+/* ======================= index页面（上部分） ======================= */
+.chat-container {
+    width: 100%;
+    max-width: 600px;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    height: 80vh;
+    margin-top: 54px;
+    backdrop-filter: blur(80px);
+}
+
+.messages {
+    flex: 1;
+    overflow-y: auto;
+    border: 1px solid #ddd;
+    margin-bottom: 5px;
+    padding: 15px;
+    border-radius: 5px;
+    background-color: #f8f9fa;
+    font-size: 16px;
+}
+.message {
+    display: flex;
+    align-items: flex-start;
+    margin-bottom: 15px;
+}
+.message:last-child {
+    margin-bottom: 0;
+}
+.message img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    margin-right: 10px;
+}
+.message-content {
+    padding: 10px 14px;
+    border-radius: 12px;
+    max-width: 85%;
+    font-size: 16px;
+    line-height: 1.5;
+    background-color: #f8f9fa;
+    border: 1px solid #e9ecef;
+    margin: 0;
+}
+.message-content .title {
+    font-size: 1.3em;
+    font-weight: bold;
+    display: block;
+    margin: 16px 0 12px 0;
+    color: #333;
+}
+.message.user {
+    flex-direction: row-reverse;
+}
+.message.user img {
+    margin-left: 10px;
+    margin-right: 0;
+}
+.message.user .message-content {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    margin-left: auto;
+}
+.message.assistant .message-content {
+    background-color: #f8f9fa;
+    color: #333;
+    border: 1px solid #e9ecef;
+}
+.message.assistant .message-content p {
+    margin: 0;
+    padding: 0;
+}
+.message.assistant .message-content p + p {
+    margin-top: 8px;
+}
+.bold-text {
+    font-weight: 600;
+    color: #1a1a1a;
+}
+
+
+
+/* ======================= index页面（下部分） ======================= */
+.input-container {
+    display: flex;
+    gap: 10px;
+    padding: 10px;
+    border-radius: 5px;
+    background-color: #f8f9fa;
+    border: 1px solid #ddd;
+}
+
+.left-panel {
+    width: 100px;
+    height: 80px;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    flex-shrink: 0; /* 防止被压缩 */
+}
+
+.upload-area {
+    width: 100%;
+    height: 100%;
+    border: 2px dashed #007bff;
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+}
+.upload-area.dragover {
+    border-color: #0056b3;
+    background: #e3f2fd;
+    box-shadow: 0 0 0 4px #90caf9;
+}
+.upload-area:hover {
+    background: rgba(144, 202, 249, 0.2);
+}
+.upload-icon {
+    width: 48px;
+    height: 48px;
+    margin: auto;
+    opacity: 0.6;
+}
+
+#picture-preview {
+    width: 100%;
+    height: 100%;
+    display: none;
+    padding: 5px;
+}
+#picture-preview img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    border-radius: 6px;
+}
+
+.delete-btn {
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    background: #dc3545;
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 24px;
+    height: 24px;
+    cursor: pointer;
+    z-index: 10;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    line-height: 1;
+}
+.delete-btn:hover {
+    background: #c82333;
+}
+
+.right-panel {
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 5px; /* 内部每行间隔10px */
+    flex: 1 1 0%; /* 撑满剩余空间 */
+}
+
+.right-panel > * {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.button-row {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 5px; /* 按钮间距5px */
+}
+
+.button-row .btn {
+    flex: 1 1 0;
+    width: 100%;
+    margin: 0;
+    /* 保证按钮高度一致，可根据需要调整 */
+}
+
+
+
+
+/* ======================= RAG页面专用 ======================= */
+
+.whole-panel {
+    display: flex;
+    flex-direction: column;
+}
+.whole-panel > * {
+    margin-bottom: 10px; /* 每个子元素下方加 10px 间隔 */
+}
+.PDF-panel {
+    width: 100%;
+    height: 200px;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    flex-shrink: 0; /* 防止被压缩 */
+    text-align: center;
+    margin-bottom: 10px;
+}
+#drop-area {
+    border: 2px dashed #007bff;
+    border-radius: 10px;
+    padding: 40px 20px;
+    background: #f8f9fa;
+    text-align: center;
+    cursor: pointer;
+    transition: border-color 0.3s, box-shadow 0.3s;
+    margin-bottom: 10px;
+    position: relative;
+    height: 240px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+
+
+#uploaded-files {
+    background: #e3f2fd;
+    border-radius: 6px;
+    padding: 10px;
+    text-align: center;
+    border: 1px solid #90caf9;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    margin-top: 10px;
+}
+#uploaded-files::before {
+    content: "已上传的文件：";
+    display: block;
+    color: #1976d2;
+    font-weight: bold;
+    margin-bottom: 10px;
+    font-size: 1.1rem;
+}
+#uploaded-files div {
+    font-size: 1rem;
+    color: #1976d2;
+    margin-bottom: 8px;
+    word-break: break-all;
+    padding: 8px 15px;
+    background: rgba(255,255,255,0.7);
+    border-radius: 4px;
+    transition: all 0.2s ease;
+}
+
+#knowledge-status {
+    margin-top: auto;
+}
+
+
+
+/* ======================= 黑夜模式 ======================= */
+body.dark-mode {
+    background-color: #23272f !important;
+    color: #fff !important;
+}
+
+/* 黑夜模式下，未激活标签为深灰，激活标签为蓝色 */
+body.dark-mode .bookmark-bar .bookmark-btn {
+    background: #23272f !important;
+    color: #b0b8c1 !important;
+}
+body.dark-mode .bookmark-bar .bookmark-btn.active {
+    background: #1976d2 !important;
+    color: #fff !important;
+}
+body.dark-mode .bookmark-bar .bookmark-btn:hover,
+body.dark-mode .bookmark-bar .bookmark-btn:focus {
+    background: #2d333b !important;
+    color: #fff !important;
+}
+
+/* 黑夜模式下聊天容器和消息区域 */
+body.dark-mode .chat-container {
+    background-color: #23272a !important;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.5) !important;
+}
+body.dark-mode .messages {
+    background-color: #23272a !important;
+    border-color: #444 !important;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.5) !important;
+}
+body.dark-mode .message.assistant .message-content {
+    background: #444 !important;   /* 比背景亮一点 */
+    color: #fff !important;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.25);
+}
+body.dark-mode .bold-text {
+    color: #ffe082;
+}
+
+
+/* 黑夜模式下输入容器和拖拽区域 */
+body.dark-mode .input-container {
+    background-color: #23272a !important;
+    border-color: #444 !important;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.5) !important;
+}
+body.dark-mode .upload-area {
+    background: #444 !important;
+}
+
+body.dark-mode #uploaded-files {
+    background: #23272a !important;
+    border-color: #444 !important;
+    color: #b3d1ff !important;
+}
+
+body.dark-mode #uploaded-files div {
+    background: #444 !important;
+    color: #b3d1ff !important;
+}
+
+body.dark-mode #chat-input {
+    background: #444 !important;   /* 比背景亮一点 */
+    color: #fff !important;
+}
+.dark-mode #chat-input::placeholder {
+    color: #929292; 
+}
+
+.dark-mode #knowledge-status {
+    background: #23272a !important;
+    border-color: #444 !important;
+    color: #fff !important;
+}
+.dark-mode #knowledge-status .card-header {
+    background: #444 !important;
+    border-color: #444 !important;
+}
+
+
+/* 建筑师三圆展示：中间最大最深，左二右三都小且淡，字号随圆大小变化 */
+.architects-keywords-box {
+    width: 100%;
+    margin: 0 auto 18px auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: transparent;
+}
+.architects-circles-custom {
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    gap: 18px;
+    margin: 18px 0 10px 0;
+}
+.architect-circle-large {
+    width: 112px;
+    height: 112px;
+    background: linear-gradient(135deg, #17408b 60%, #2560c0 100%);
+    color: #fff;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.45rem;
+    font-weight: bold;
+    box-shadow: 0 6px 20px rgba(23,64,139,0.22);
+    border: 5px solid #fff;
+    z-index: 2;
+    transition: box-shadow 0.2s;
+}
+.architect-circle-middle {
+    width: 96px;
+    height: 96px;
+    background: linear-gradient(135deg, #3576d1 60%, #7bb6ff 100%);
+    color: #fff;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.28rem;
+    font-weight: 600;
+    box-shadow: 0 4px 14px rgba(53,118,209,0.16);
+    border: 4px solid #fff;
+    z-index: 2;
+    transition: box-shadow 0.2s;
+}
+.architect-circle-small {
+    width: 80px;
+    height: 80px;
+    background: linear-gradient(135deg, #b3d1ff 60%, #eaf2ff 100%);
+    color: #4e8cff;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.02rem;
+    font-weight: 600;
+    box-shadow: 0 2px 8px rgba(80,120,200,0.10);
+    border: 2.5px solid #fff;
+    z-index: 1;
+    transition: box-shadow 0.2s;
+}
+.architect-circle-left {
+    margin-right: -10px;
+}
+.architect-circle-right {
+    margin-left: -10px;
+}
+.keywords-rows {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 8px;
+}
+.keywords-row {
+    display: flex;
+    gap: 12px;
+}
+.keyword-item {
+    background: #eaf2ff;
+    color: #2a4a7b;
+    border-radius: 16px;
+    padding: 4px 14px;
+    font-size: 0.98rem;
+    margin: 0 2px;
+    box-shadow: 0 1px 2px rgba(80,120,200,0.06);
+}
+body.dark-mode .architect-circle-large {
+    background: linear-gradient(135deg, #0e1d36 60%, #17408b 100%);
+    color: #fff;
+    border: 5px solid #222c3a;
+}
+body.dark-mode .architect-circle-middle {
+    background: linear-gradient(135deg, #1a2a4a 60%, #3576d1 100%);
+    color: #b3d1ff;
+    border: 4px solid #222c3a;
+}
+body.dark-mode .architect-circle-small {
+    background: linear-gradient(135deg, #23272a 60%, #2a3a5a 100%);
+    color: #b3d1ff;
+    border: 2.5px solid #222c3a;
+}
+body.dark-mode .keywords-row .keyword-item {
+    background: #2a3a5a;
+    color: #b3d1ff;
+}
+
+
+
+

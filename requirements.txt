@@ -1,0 +1,35 @@
+# Core Llama-Index
+llama-index==0.10.11
+llama-index-embeddings-openai==0.1.7
+llama-index-embeddings-huggingface==0.1.3
+llama-index-llms-openai==0.1.10
+llama-index-readers-file==0.1.6
+llama-index-vector-stores-postgres==0.1.3
+llama-index-retrievers-bm25==0.1.3
+
+# PDF & Document Processing
+pypdf==4.0.1
+
+# Database & ORM
+psycopg2-binary==2.9.9
+sqlalchemy==2.0.25
+pgvector==0.2.4
+
+# Web Frameworks
+fastapi==0.103.2
+flask==2.3.3
+
+# Utilities
+python-dotenv==1.0.0
+pydantic==1.10.13  # Explicitly locked to v1.x
+
+# Text-to-Speech
+edge-tts==6.1.6
+
+# 关键间接依赖（自动安装时会忽略，建议显式声明）
+numpy>=1.21.0
+pandas>=1.3.0
+tqdm>=4.65.0
+typing-extensions>=4.5.0
+openai>=0.27.0
+requests>=2.28.0

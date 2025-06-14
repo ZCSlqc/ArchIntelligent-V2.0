@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>文档上传页面</title>
+    <link rel="icon" type="image/png" href="{{ url_for('static', filename='img/bot-avatar.png') }}">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+</head>
+<body>
+<div class="main-container">
+    <div class="bookmark-bar">
+        <a href="{{ url_for('index') }}" class="bookmark-btn{% if request.endpoint=='index' %} active{% endif %}">聊天</a>
+        <a href="{{ url_for('rag') }}" class="bookmark-btn{% if request.endpoint=='rag' %} active{% endif %}">资料</a>
+        <span class="bookmark-btn">合同</span>
+        <button class="bookmark-btn" id="theme-toggle-btn" onclick="toggleTheme()">主题</button>
+    </div>
+    <div class="chat-container">
+        <div class="whole-panel">
+            <div class="PDF-panel">
+                <div class="upload-area" id="uploadPDF-area">
+                    <input type="file" id="uploadPDF-click" name="pdf" accept="application/pdf" multiple style="display:none;" required>
+                    <span id="uploadPDF-text">
+                        将文件拖放到此处<br><b>-或-</b><br>点击上传
+                    </span>
+                    <div id="upload-loading" class="loading" style="display: none;">上传中...</div>
+                </div>
+            </div>
+            <button class="btn btn-primary w-100" onclick="fileUpload()">上传文件</button>
+            <button class="btn btn-danger w-100" onclick="clearUpload()">清空知识库</button>
+            
+            <!-- 已上传文件展示区域 -->
+            <div id="uploaded-files" style="display:none;"></div>
+        </div>
+
+        <!-- 知识库状态 -->
+        <div class="card mb-3" id="knowledge-status">
+            <div class="card-header">知识库状态: <span id="flash-message" style="font-weight: bold;">{{ message }}</span></div>
+            <div class="card-body">
+                <ul>
+                    <li>文档数量：<span id="doc-count">{{ status.document_count }}</span></li>
+                    <li>表名：<span id="table-name">{{ status.table_name }}</span></li>
+                    <li>嵌入模型：<span id="embedding-model">{{ status.embedding_model }}</span>（维度：<span id="embedding-dim">{{ status.embedding_dim }}</span>）</li>
+                    <li>LLM模型：<span id="llm-model">{{ status.llm_model }}</span></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
